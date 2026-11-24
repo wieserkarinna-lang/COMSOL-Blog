@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>饱和电抗器 COMSOL 仿真 · 韩小梵</title>
+  <meta name="description" content="韩小梵的 COMSOL 仿真记录：饱和电抗器三维建模、铁芯与绕组结构、线圈激励设置和 50 Hz 磁通密度分布。">
+  <meta name="theme-color" content="#f2f0ea">
+  <meta property="og:title" content="饱和电抗器的 COMSOL 仿真 · 韩小梵">
+  <meta property="og:description" content="基于 COMSOL Multiphysics 的饱和电抗器三维建模与磁场仿真记录。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/04-flux-density.webp">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="韩小梵的 COMSOL 仿真笔记，返回顶部">
+        <span class="brand-mark" aria-hidden="true">HXF</span>
+        <span class="brand-text">
+          <span class="brand-name">韩小梵</span>
+          <span class="brand-sub">COMSOL 仿真笔记</span>
+        </span>
+      </a>
+      <p class="header-meta">
+        <span>COMSOL Multiphysics</span>
+        <span>50 Hz</span>
+      </p>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="container">
+        <div class="intro-top">
+          <p class="eyebrow">Simulation notes · 001—004</p>
+          <p class="eyebrow">电磁场 / 三维建模 / 有限元</p>
+        </div>
+
+        <div class="intro-main">
+          <h1 class="page-title" id="page-title">
+            饱和电抗器的<br>
+            <span class="title-accent">COMSOL 仿真。</span>
+          </h1>
+
+          <div class="intro-side">
+            <p class="intro-description">
+              COMSOL Multiphysics 是一款基于有限元方法的多物理场仿真平台。本次以饱和电抗器为对象，完成三维几何建模、线圈输入设置与 50 Hz 磁场求解，观察磁通密度分布，为后续铁芯损耗和温升分析提供依据。
+            </p>
+          </div>
+        </div>
+
+        <dl class="specs" aria-label="仿真基本信息">
+          <div class="spec">
+            <dt>研究对象</dt>
+            <dd>饱和电抗器</dd>
+          </div>
+          <div class="spec">
+            <dt>仿真平台</dt>
+            <dd>COMSOL Multiphysics</dd>
+          </div>
+          <div class="spec">
+            <dt>激励频率</dt>
+            <dd>50 Hz</dd>
+          </div>
+          <div class="spec">
+            <dt>关注结果</dt>
+            <dd>磁通密度分布</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="gallery" aria-label="COMSOL 仿真过程与结果">
+      <div class="container">
+        <article class="sim-entry">
+          <figure class="sim-figure">
+            <div class="sim-print">
+              <img
+                class="sim-image"
+                src="images/01-reactor-model.webp"
+                width="783"
+                height="948"
+                alt="含铁芯、绕组、油箱和套管结构的饱和电抗器三维几何模型，各部件带有编号标注。"
+                fetchpriority="high"
+                decoding="async"
+              >
+            </div>
+            <figcaption class="sim-figcaption">
+              <span>Fig. 01</span>
+              <span>三维几何模型</span>
+            </figcaption>
+          </figure>
+
+          <div class="sim-copy">
+            <p class="sim-kicker">01 / Geometry</p>
+            <h2>建立三维模型</h2>
+            <p class="sim-description">
+              在 COMSOL 中建立包含铁芯、绕组、油箱与套管等主要部件的三维几何，保留内部结构，为后续材料赋值、边界设置与网格划分确定完整的计算区域。
+            </p>
+          </div>
+        </article>
+
+        <article class="sim-entry sim-entry--reverse">
+          <figure class="sim-figure">
+            <div class="sim-print">
+              <img
+                class="sim-image"
+                src="images/02-reactor-winding.webp"
+                width="1017"
+                height="668"
+                alt="绕有多个线圈的环形饱和电抗器三维模型，蓝色部分表示铁芯，灰色部分表示绕组。"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <figcaption class="sim-figcaption">
+              <span>Fig. 02</span>
+              <span>铁芯与绕组</span>
+            </figcaption>
+          </figure>
+
+          <div class="sim-copy">
+            <p class="sim-kicker">02 / Winding</p>
+            <h2>铁芯与绕组结构</h2>
+            <p class="sim-description">
+              对环形铁芯和绕组进行几何划分，确认线圈的绕制位置与空间布置，为线圈激励、材料参数和网格设置建立基础。
+            </p>
+          </div>
+        </article>
+
+        <article class="sim-entry">
+          <figure class="sim-figure">
+            <div class="sim-print">
+              <img
+                class="sim-image"
+                src="images/03-coil-input.webp"
+                width="672"
+                height="400"
+                alt="COMSOL 中的线圈局部几何图，一段环形区域被蓝色高亮，并带有红色箭头标记。"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <figcaption class="sim-figcaption">
+              <span>Fig. 03</span>
+              <span>线圈与输入</span>
+            </figcaption>
+          </figure>
+
+          <div class="sim-copy">
+            <p class="sim-kicker">03 / Input</p>
+            <h2>线圈与激励设置</h2>
+            <p class="sim-description">
+              在局部几何中选取线圈区域并检查边界关系，设置相应的输入条件，使模型能够在指定频率下求解电磁场响应。
+            </p>
+          </div>
+        </article>
+
+        <article class="sim-entry sim-entry--reverse">
+          <figure class="sim-figure">
+            <div class="sim-print">
+              <img
+                class="sim-image"
+                src="images/04-flux-density.webp"
+                width="1250"
+                height="760"
+                alt="COMSOL 在 50 Hz 下计算的磁通密度模分布图，铁芯与绕组区域呈不均匀的颜色分布，并叠加磁通密度箭头。"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+            <figcaption class="sim-figcaption">
+              <span>Fig. 04</span>
+              <span>磁通密度 / 50 Hz</span>
+            </figcaption>
+          </figure>
+
+          <div class="sim-copy">
+            <p class="sim-kicker">04 / Magnetic field</p>
+            <h2>磁通密度分布</h2>
+            <p class="sim-description">
+              在 50 Hz 激励下，铁芯与绕组区域呈现非均匀的磁通密度分布。该结果可用于后续铁损计算，并为进一步的铁芯温升分析提供依据。
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 韩小梵 · COMSOL 仿真记录</p>
+      <p class="footer-meta">Saturable reactor / Magnetic field</p>
+      <a class="back-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+</body>
+</html>
